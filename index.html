@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shiftix - تطبيق إدارة المناوبات</title>
+    <meta name="description" content="تطبيق Shiftix لإدارة جداول المناوبات للعاملين في القطاع الصحي">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="assets/icon.png">
+    
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="Shiftix - تطبيق إدارة المناوبات">
+    <meta property="og:description" content="نظم مناوباتك بذكاء مع Shiftix">
+    <meta property="og:image" content="https://shiftix.aldaghir.com/assets/icon.png">
+    <meta property="og:url" content="https://shiftix.aldaghir.com">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="container">
+                <div class="logo">
+                    <img src="assets/icon.png" alt="Shiftix">
+                    <span>Shiftix</span>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#features">المميزات</a></li>
+                    <li><a href="#download">تحميل</a></li>
+<li><a href="policies.html">الخصوصية</a></li>
+<li><a href="policies.html#terms">الشروط</a></li>
+                    <li><a href="#" class="lang-switch" onclick="toggleLang()">EN</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+<div class="hero-image">
+.hero-image {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.phone-mockup-real {
+    width: 120px;
+    height: 200px;
+    background: #000;
+    border-radius: 35px;
+    padding: 8px;
+    box-shadow: 
+        0 0 0 2px #333,
+        0 20px 50px rgba(0,0,0,0.5);
+    position: relative;
+    transform: rotate(-5deg);
+}
+
+.phone-mockup-real img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 27px;
+}
+
+/* تأثير اللمعان */
+.phone-mockup-real::after {
+    content: '';
+    position: absolute;
+    top: 10%;
+    left: -5%;
+    width: 30%;
+    height: 80%;
+    background: linear-gradient(
+        90deg, 
+        transparent, 
+        rgba(255,255,255,0.1), 
+        transparent
+    );
+    transform: skewX(-20deg);
+    animation: shine 3s infinite;
+}
+
+@keyframes shine {
+    0%, 100% { left: -5%; }
+    50% { left: 105%; }
+}
+    <div class="phone-mockup-real">
+        <img src="assets/screenshots/hero-mockup.png" alt="Shiftix Calendar">
+    </div>
+</div>
+                    <h1>نظم مناوباتك بذكاء</h1>
+                    <p>تطبيق Shiftix يساعدك في إدارة جداول المناوبات بكفاءة عالية</p>
+                    <div class="cta-buttons">
+                        <a href="https://play.google.com/store/apps/details?id=com.aldaghir.shiftix" class="btn-primary">
+                            <img src="https://play.google.com/intl/en_us/badges/static/images/badges/ar_badge_web_generic.png" alt="Google Play">
+                        </a>
+                    </div>
+                    <p class="trial-info">🎁 7 أيام تجربة مجانية</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section id="features" class="features">
+            <div class="container">
+                <h2>مميزات التطبيق</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="icon">📅</div>
+                        <h3>إدارة ذكية للمناوبات</h3>
+                        <p>نظام متقدم لإدارة جداول المناوبات مع تخصيص كامل</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="icon">🔔</div>
+                        <h3>إشعارات ذكية</h3>
+                        <p>تذكيرات مخصصة للمناوبات مع دعم ساعات الصمت</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="icon">🔒</div>
+                        <h3>خصوصية كاملة</h3>
+                        <p>بياناتك محلية 100% - لا نجمع أي معلومات</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="icon">📊</div>
+                        <h3>تحليلات وإحصائيات</h3>
+                        <p>لوحة شاملة لتحليل ساعات العمل والأنماط</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="icon">💾</div>
+                        <h3>نسخ احتياطي آمن</h3>
+                        <p>احم بياناتك مع النسخ الاحتياطي والاستعادة</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="icon">🌍</div>
+                        <h3>متعدد اللغات</h3>
+                        <p>يدعم العربية والإنجليزية و5 لغات أخرى</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Privacy Section -->
+        <section class="privacy-highlight">
+            <div class="container">
+                <h2>🔐 خصوصيتك أولويتنا</h2>
+                <div class="privacy-content">
+                    <p>تطبيق Shiftix يعمل بالكامل على جهازك:</p>
+                    <ul>
+                        <li>✅ لا نجمع أي بيانات شخصية</li>
+                        <li>✅ لا يوجد اتصال بخوادم خارجية</li>
+                        <li>✅ بياناتك ملك لك 100%</li>
+                        <li>✅ يمكنك حذف بياناتك في أي وقت</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Download Section -->
+        <section id="download" class="download">
+            <div class="container">
+                <h2>جرب Shiftix اليوم</h2>
+                <p>7 أيام تجربة مجانية بكامل المميزات</p>
+                <p class="price">السعر بعد التجربة: $4.99 فقط (دفعة واحدة)</p>
+                <a href="https://play.google.com/store/apps/details?id=com.aldaghir.shiftix" class="btn-download">
+                    حمل الآن من Google Play
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Shiftix</h4>
+                    <p>تطبيق إدارة المناوبات للقطاع الصحي</p>
+                </div>
+                <div class="footer-section">
+                    <h4>روابط مهمة</h4>
+                    <ul>
+                        <li><a href="policies.html">سياسة الخصوصية</a></li>
+<li><a href="policies.html#terms">شروط الاستخدام</a></li>
+                        <li><a href="mailto:shiftix@aldaghir.com">اتصل بنا</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>تواصل معنا</h4>
+                    <p>shiftix@aldaghir.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Shiftix. جميع الحقوق محفوظة.</p>
+                <p>صُمم بـ ❤️ للعاملين في القطاع الصحي</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleLang() {
+            // يمكنك إضافة منطق تبديل اللغة هنا
+            alert('النسخة الإنجليزية قيد الإنشاء');
+        }
+    </script>
+</body>
+</html>
