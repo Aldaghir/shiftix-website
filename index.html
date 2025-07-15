@@ -3,33 +3,706 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shiftix - تطبيق إدارة المناوبات</title>
-    <meta name="description" content="تطبيق Shiftix لإدارة جداول المناوبات للعاملين في القطاع الصحي">
-    <link rel="stylesheet" href="style.css">
-    <link rel="icon" type="image/png" href="assets/icon.png">
+    <title>Shiftix - تطبيق إدارة المناوبات الذكي للقطاع الصحي</title>
+    <meta name="description" content="تطبيق Shiftix - الحل الأمثل لإدارة جداول المناوبات للعاملين في القطاع الصحي. نظم وقتك بكفاءة مع أدوات ذكية ومتقدمة.">
+    <link rel="icon" type="image/png" href="assets/icon.svg">
     
     <!-- Open Graph Tags -->
-    <meta property="og:title" content="Shiftix - تطبيق إدارة المناوبات">
-    <meta property="og:description" content="نظم مناوباتك بذكاء مع Shiftix">
-    <meta property="og:image" content="https://shiftix.aldaghir.com/assets/icon.png">
+    <meta property="og:title" content="Shiftix - تطبيق إدارة المناوبات الذكي">
+    <meta property="og:description" content="نظم مناوباتك بذكاء وكفاءة مع Shiftix">
+    <meta property="og:image" content="https://shiftix.aldaghir.com/assets/icon.svg">
     <meta property="og:url" content="https://shiftix.aldaghir.com">
     
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* ألوان احترافية متناسقة */
+            --primary: #5B4CCC;
+            --primary-dark: #4A3DB8;
+            --primary-light: #7C6FE4;
+            --secondary: #FF6B9D;
+            --accent: #FEC860;
+            --success: #2ECC71;
+            --text-dark: #2C3E50;
+            --text-light: #7F8C8D;
+            --bg-light: #F8F9FA;
+            --bg-white: #FFFFFF;
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.06);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+            --shadow-lg: 0 10px 30px rgba(0,0,0,0.12);
+            --gradient-primary: linear-gradient(135deg, #5B4CCC 0%, #7C6FE4 100%);
+            --gradient-hero: linear-gradient(135deg, #5B4CCC 0%, #6B5DD3 50%, #7C6FE4 100%);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Tajawal', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--bg-white);
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Navigation المحسّن */
+        header {
+            background: var(--bg-white);
+            box-shadow: var(--shadow-sm);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        header.scrolled {
+            box-shadow: var(--shadow-md);
+        }
+        
+        nav {
+            padding: 1rem 0;
+        }
+        
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            transition: transform 0.3s ease;
+        }
+        
+        .logo:hover {
+            transform: translateY(-2px);
+        }
+        
+        .logo img {
+            width: 45px;
+            height: 45px;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+        }
+        
+        .logo span {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+            align-items: center;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            right: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        .lang-switch {
+            background: var(--primary);
+            color: white !important;
+            padding: 0.5rem 1.2rem;
+            border-radius: 25px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .lang-switch:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(91, 76, 204, 0.3);
+        }
+        
+        /* Hero Section المحسّن */
+        .hero {
+            background: var(--gradient-hero);
+            padding: 120px 0 80px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: float 20s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: rotate(0deg) scale(1); }
+            50% { transform: rotate(180deg) scale(1.1); }
+        }
+        
+        .hero .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero-content h1 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: white;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .hero-content .subtitle {
+            font-size: 1.3rem;
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 2rem;
+            font-weight: 400;
+        }
+        
+        .hero-features {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 2.5rem;
+        }
+        
+        .hero-feature {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: rgba(255,255,255,0.95);
+            font-size: 1rem;
+        }
+        
+        .hero-feature span {
+            background: rgba(255,255,255,0.2);
+            padding: 0.3rem 0.6rem;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .cta-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            align-items: flex-start;
+        }
+        
+        .btn-primary {
+            background: white;
+            color: var(--primary);
+            padding: 1rem 2.5rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.25);
+        }
+        
+        .google-play-badge {
+            height: 60px;
+            transition: transform 0.3s ease;
+        }
+        
+        .google-play-badge:hover {
+            transform: scale(1.05);
+        }
+        
+        .trial-badge {
+            background: var(--accent);
+            color: var(--text-dark);
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: 0 4px 15px rgba(254, 200, 96, 0.4);
+        }
+        
+        /* Phone Mockup المحسّن */
+        .hero-mockup {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .phone-device {
+            width: 320px;
+            height: 650px;
+            background: #1C1C1E;
+            border-radius: 40px;
+            padding: 10px;
+            box-shadow: 
+                0 0 0 10px #1C1C1E,
+                0 0 0 13px #2C2C2E,
+                0 20px 40px rgba(0,0,0,0.3),
+                0 40px 80px rgba(0,0,0,0.2);
+            position: relative;
+            transform: rotate(-8deg) translateY(-20px);
+            transition: transform 0.3s ease;
+        }
+        
+        .phone-device:hover {
+            transform: rotate(-5deg) translateY(-30px);
+        }
+        
+        .phone-screen {
+            width: 100%;
+            height: 100%;
+            background: #F8F8F8;
+            border-radius: 30px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .phone-notch {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 140px;
+            height: 28px;
+            background: #1C1C1E;
+            border-radius: 0 0 20px 20px;
+            z-index: 10;
+        }
+        
+        .phone-screen img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        /* Features Section المحسّن */
+        .features {
+            padding: 100px 0;
+            background: var(--bg-light);
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        
+        .section-header h2 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+        }
+        
+        .section-header p {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+        }
+        
+        .feature-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100px;
+            height: 100px;
+            background: var(--gradient-primary);
+            opacity: 0.1;
+            border-radius: 0 0 0 100%;
+            transition: all 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .feature-card:hover::before {
+            width: 150px;
+            height: 150px;
+        }
+        
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            background: var(--gradient-primary);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 8px 20px rgba(91, 76, 204, 0.2);
+        }
+        
+        .feature-card h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+        }
+        
+        .feature-card p {
+            color: var(--text-light);
+            line-height: 1.8;
+        }
+        
+        /* Privacy Section المحسّن */
+        .privacy-section {
+            padding: 100px 0;
+            background: white;
+            position: relative;
+        }
+        
+        .privacy-section .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        
+        .privacy-content h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 1.5rem;
+        }
+        
+        .privacy-content p {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+        }
+        
+        .privacy-features {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        .privacy-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.2rem;
+            background: var(--bg-light);
+            border-radius: 15px;
+            transition: all 0.3s ease;
+        }
+        
+        .privacy-item:hover {
+            background: var(--gradient-primary);
+            color: white;
+            transform: translateX(-10px);
+        }
+        
+        .privacy-item:hover .privacy-icon {
+            background: white;
+            color: var(--primary);
+        }
+        
+        .privacy-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--gradient-primary);
+            color: white;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .privacy-item span {
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        
+        .privacy-illustration {
+            position: relative;
+        }
+        
+        .privacy-illustration img {
+            width: 100%;
+            max-width: 500px;
+            height: auto;
+        }
+        
+        /* Stats Section */
+        .stats-section {
+            padding: 80px 0;
+            background: var(--gradient-primary);
+            color: white;
+            text-align: center;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .stat-item h3 {
+            font-size: 3rem;
+            font-weight: 900;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-item p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        /* Download Section المحسّن */
+        .download-section {
+            padding: 100px 0;
+            background: var(--bg-light);
+            text-align: center;
+        }
+        
+        .download-content h2 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+        }
+        
+        .download-content p {
+            font-size: 1.3rem;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+        }
+        
+        .price-tag {
+            background: var(--gradient-primary);
+            color: white;
+            display: inline-block;
+            padding: 1.5rem 3rem;
+            border-radius: 50px;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(91, 76, 204, 0.3);
+        }
+        
+        .price-tag small {
+            font-size: 1rem;
+            opacity: 0.9;
+            display: block;
+            margin-top: 0.5rem;
+        }
+        
+        .download-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .btn-download {
+            background: var(--text-dark);
+            color: white;
+            padding: 1.2rem 3rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(44, 62, 80, 0.3);
+        }
+        
+        .btn-download:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(44, 62, 80, 0.4);
+        }
+        
+        /* Footer المحسّن */
+        footer {
+            background: var(--text-dark);
+            color: white;
+            padding: 60px 0 30px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+        
+        .footer-section h4 {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            color: white;
+        }
+        
+        .footer-section p,
+        .footer-section a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            line-height: 1.8;
+        }
+        
+        .footer-section a:hover {
+            color: white;
+        }
+        
+        .footer-section ul {
+            list-style: none;
+        }
+        
+        .footer-section ul li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .footer-bottom p {
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero .container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-mockup {
+                margin-top: 3rem;
+            }
+            
+            .phone-device {
+                width: 260px;
+                height: 530px;
+            }
+            
+            .privacy-section .container {
+                grid-template-columns: 1fr;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+        
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
 </head>
 <body>
-    <header>
+    <!-- Navigation -->
+    <header id="header">
         <nav>
             <div class="container">
-                <div class="logo">
-                    <img src="assets/icon.png" alt="Shiftix">
+                <a href="#" class="logo">
+                    <img src="assets/icon.svg" alt="Shiftix">
                     <span>Shiftix</span>
-                </div>
+                </a>
                 <ul class="nav-links">
                     <li><a href="#features">المميزات</a></li>
+                    <li><a href="#privacy">الخصوصية</a></li>
                     <li><a href="#download">تحميل</a></li>
-<li><a href="policies.html">الخصوصية</a></li>
-<li><a href="policies.html#terms">الشروط</a></li>
+                    <li><a href="policies.html">السياسات</a></li>
                     <li><a href="#" class="lang-switch" onclick="toggleLang()">EN</a></li>
                 </ul>
             </div>
@@ -40,69 +713,40 @@
         <!-- Hero Section -->
         <section class="hero">
             <div class="container">
-                <div class="hero-content">
-<div class="hero-image">
-.hero-image {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.phone-mockup-real {
-    width: 120px;
-    height: 200px;
-    background: #000;
-    border-radius: 35px;
-    padding: 8px;
-    box-shadow: 
-        0 0 0 2px #333,
-        0 20px 50px rgba(0,0,0,0.5);
-    position: relative;
-    transform: rotate(-5deg);
-}
-
-.phone-mockup-real img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 27px;
-}
-
-/* تأثير اللمعان */
-.phone-mockup-real::after {
-    content: '';
-    position: absolute;
-    top: 10%;
-    left: -5%;
-    width: 30%;
-    height: 80%;
-    background: linear-gradient(
-        90deg, 
-        transparent, 
-        rgba(255,255,255,0.1), 
-        transparent
-    );
-    transform: skewX(-20deg);
-    animation: shine 3s infinite;
-}
-
-@keyframes shine {
-    0%, 100% { left: -5%; }
-    50% { left: 105%; }
-}
-    <div class="phone-mockup-real">
-        <img src="assets/screenshots/hero-mockup.png" alt="Shiftix Calendar">
-    </div>
-</div>
-                    <h1>نظم مناوباتك بذكاء</h1>
-                    <p>تطبيق Shiftix يساعدك في إدارة جداول المناوبات بكفاءة عالية</p>
-                    <div class="cta-buttons">
-                        <a href="https://play.google.com/store/apps/details?id=com.aldaghir.shiftix" class="btn-primary">
-                            <img src="https://play.google.com/intl/en_us/badges/static/images/badges/ar_badge_web_generic.png" alt="Google Play">
-                        </a>
+                <div class="hero-content fade-in">
+                    <h1>نظم مناوباتك<br>بذكاء وكفاءة</h1>
+                    <p class="subtitle">الحل الأمثل لإدارة جداول المناوبات للعاملين في القطاع الصحي</p>
+                    
+                    <div class="hero-features">
+                        <div class="hero-feature">
+                            <span>✨ سهل الاستخدام</span>
+                        </div>
+                        <div class="hero-feature">
+                            <span>🔒 آمن 100%</span>
+                        </div>
+                        <div class="hero-feature">
+                            <span>📱 محلي بالكامل</span>
+                        </div>
                     </div>
-                    <p class="trial-info">🎁 7 أيام تجربة مجانية</p>
+                    
+                    <div class="cta-wrapper">
+                        <a href="https://play.google.com/store/apps/details?id=com.aldaghir.shiftix" target="_blank">
+                            <img src="https://play.google.com/intl/en_us/badges/static/images/badges/ar_badge_web_generic.png" 
+                                 alt="Google Play" class="google-play-badge">
+                        </a>
+                        <div class="trial-badge">
+                            🎁 7 أيام تجربة مجانية بكامل المميزات
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="hero-mockup fade-in">
+                    <div class="phone-device">
+                        <div class="phone-notch"></div>
+                        <div class="phone-screen">
+                            <img src="assets/screenshots/hero-mockup.png" alt="Shiftix App">
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -110,91 +754,168 @@
         <!-- Features Section -->
         <section id="features" class="features">
             <div class="container">
-                <h2>مميزات التطبيق</h2>
+                <div class="section-header fade-in">
+                    <h2>مميزات تجعل حياتك أسهل</h2>
+                    <p>صُمم Shiftix خصيصاً لتلبية احتياجات العاملين في القطاع الصحي</p>
+                </div>
+                
                 <div class="features-grid">
-                    <div class="feature-card">
-                        <div class="icon">📅</div>
+                    <div class="feature-card fade-in">
+                        <div class="feature-icon">📅</div>
                         <h3>إدارة ذكية للمناوبات</h3>
-                        <p>نظام متقدم لإدارة جداول المناوبات مع تخصيص كامل</p>
+                        <p>نظام متقدم لتنظيم جداول المناوبات مع إمكانية التخصيص الكامل حسب احتياجاتك</p>
                     </div>
-                    <div class="feature-card">
-                        <div class="icon">🔔</div>
+                    
+                    <div class="feature-card fade-in">
+                        <div class="feature-icon">🔔</div>
                         <h3>إشعارات ذكية</h3>
-                        <p>تذكيرات مخصصة للمناوبات مع دعم ساعات الصمت</p>
+                        <p>تذكيرات مخصصة للمناوبات مع دعم ساعات الصمت وإدارة متقدمة للتنبيهات</p>
                     </div>
-                    <div class="feature-card">
-                        <div class="icon">🔒</div>
-                        <h3>خصوصية كاملة</h3>
-                        <p>بياناتك محلية 100% - لا نجمع أي معلومات</p>
+                    
+                    <div class="feature-card fade-in">
+                        <div class="feature-icon">📊</div>
+                        <h3>تحليلات شاملة</h3>
+                        <p>احصائيات مفصلة عن ساعات العمل والأنماط لمساعدتك في تحسين جدولك</p>
                     </div>
-                    <div class="feature-card">
-                        <div class="icon">📊</div>
-                        <h3>تحليلات وإحصائيات</h3>
-                        <p>لوحة شاملة لتحليل ساعات العمل والأنماط</p>
+                    
+                    <div class="feature-card fade-in">
+                        <div class="feature-icon">👥</div>
+                        <h3>إدارة الزملاء</h3>
+                        <p>تنسيق سهل مع زملاء العمل ومعرفة جداولهم للتخطيط الأفضل</p>
                     </div>
-                    <div class="feature-card">
-                        <div class="icon">💾</div>
+                    
+                    <div class="feature-card fade-in">
+                        <div class="feature-icon">💾</div>
                         <h3>نسخ احتياطي آمن</h3>
-                        <p>احم بياناتك مع النسخ الاحتياطي والاستعادة</p>
+                        <p>احم بياناتك مع ميزة النسخ الاحتياطي والاستعادة في أي وقت</p>
                     </div>
-                    <div class="feature-card">
-                        <div class="icon">🌍</div>
+                    
+                    <div class="feature-card fade-in">
+                        <div class="feature-icon">🌍</div>
                         <h3>متعدد اللغات</h3>
-                        <p>يدعم العربية والإنجليزية و5 لغات أخرى</p>
+                        <p>يدعم 8 لغات مختلفة لتناسب جميع المستخدمين حول العالم</p>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- Privacy Section -->
-        <section class="privacy-highlight">
+        <section id="privacy" class="privacy-section">
             <div class="container">
-                <h2>🔐 خصوصيتك أولويتنا</h2>
-                <div class="privacy-content">
-                    <p>تطبيق Shiftix يعمل بالكامل على جهازك:</p>
-                    <ul>
-                        <li>✅ لا نجمع أي بيانات شخصية</li>
-                        <li>✅ لا يوجد اتصال بخوادم خارجية</li>
-                        <li>✅ بياناتك ملك لك 100%</li>
-                        <li>✅ يمكنك حذف بياناتك في أي وقت</li>
-                    </ul>
+                <div class="privacy-content fade-in">
+                    <h2>خصوصيتك أولويتنا القصوى</h2>
+                    <p>صُمم Shiftix ليعمل بالكامل على جهازك دون الحاجة لأي اتصال بالإنترنت أو خوادم خارجية</p>
+                    
+                    <div class="privacy-features">
+                        <div class="privacy-item">
+                            <div class="privacy-icon">🔒</div>
+                            <span>لا نجمع أي بيانات شخصية</span>
+                        </div>
+                        <div class="privacy-item">
+                            <div class="privacy-icon">📱</div>
+                            <span>كل البيانات محلية على جهازك</span>
+                        </div>
+                        <div class="privacy-item">
+                            <div class="privacy-icon">🚫</div>
+                            <span>لا يوجد اتصال بخوادم خارجية</span>
+                        </div>
+                        <div class="privacy-item">
+                            <div class="privacy-icon">✅</div>
+                            <span>تحكم كامل في بياناتك</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="privacy-illustration fade-in">
+                    <div class="phone-device" style="transform: rotate(8deg);">
+                        <div class="phone-screen" style="background: linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%);">
+                            <div style="padding: 30px; text-align: center;">
+                                <div style="font-size: 80px; margin-bottom: 20px;">🔐</div>
+                                <h3 style="color: var(--text-dark); margin-bottom: 10px;">بياناتك آمنة</h3>
+                                <p style="color: var(--text-light);">محمية ومشفرة محلياً</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Section -->
+        <section class="stats-section">
+            <div class="container">
+                <div class="stats-grid">
+                    <div class="stat-item fade-in">
+                        <h3>100%</h3>
+                        <p>محلي وآمن</p>
+                    </div>
+                    <div class="stat-item fade-in">
+                        <h3>8</h3>
+                        <p>لغات مدعومة</p>
+                    </div>
+                    <div class="stat-item fade-in">
+                        <h3>24/7</h3>
+                        <p>إشعارات ذكية</p>
+                    </div>
+                    <div class="stat-item fade-in">
+                        <h3>∞</h3>
+                        <p>تخصيص لا محدود</p>
+                    </div>
                 </div>
             </div>
         </section>
 
         <!-- Download Section -->
-        <section id="download" class="download">
+        <section id="download" class="download-section">
             <div class="container">
-                <h2>جرب Shiftix اليوم</h2>
-                <p>7 أيام تجربة مجانية بكامل المميزات</p>
-                <p class="price">السعر بعد التجربة: $4.99 فقط (دفعة واحدة)</p>
-                <a href="https://play.google.com/store/apps/details?id=com.aldaghir.shiftix" class="btn-download">
-                    حمل الآن من Google Play
-                </a>
+                <div class="download-content fade-in">
+                    <h2>ابدأ رحلتك مع Shiftix اليوم</h2>
+                    <p>انضم للعاملين في القطاع الصحي الذين ينظمون حياتهم بشكل أفضل</p>
+                    
+                    <div class="price-tag">
+                        $4.99 فقط
+                        <small>دفعة واحدة - بدون اشتراكات</small>
+                    </div>
+                    
+                    <div class="download-buttons">
+                        <a href="https://play.google.com/store/apps/details?id=com.aldaghir.shiftix" class="btn-download">
+                            <span>حمل من Google Play</span>
+                            <span style="font-size: 1.5rem;">📲</span>
+                        </a>
+                    </div>
+                    
+                    <p style="margin-top: 2rem; color: var(--text-light);">
+                        <span style="color: var(--success); font-weight: 600;">✓</span> 
+                        ضمان استرداد الأموال خلال 48 ساعة "حسب سياسة Google Play"
+                    </p>
+                </div>
             </div>
         </section>
     </main>
 
+    <!-- Footer -->
     <footer>
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
                     <h4>Shiftix</h4>
-                    <p>تطبيق إدارة المناوبات للقطاع الصحي</p>
+                    <p>الحل الأمثل لإدارة المناوبات في القطاع الصحي. صُمم بعناية ليجعل حياتك المهنية أكثر تنظيماً وسهولة.</p>
                 </div>
+                
                 <div class="footer-section">
-                    <h4>روابط مهمة</h4>
+                    <h4>روابط سريعة</h4>
                     <ul>
+                        <li><a href="#features">المميزات</a></li>
                         <li><a href="policies.html">سياسة الخصوصية</a></li>
-<li><a href="policies.html#terms">شروط الاستخدام</a></li>
-                        <li><a href="mailto:shiftix@aldaghir.com">اتصل بنا</a></li>
+                        <li><a href="policies.html#terms">شروط الاستخدام</a></li>
                     </ul>
                 </div>
+                
                 <div class="footer-section">
                     <h4>تواصل معنا</h4>
-                    <p>shiftix@aldaghir.com</p>
+                    <p>البريد الإلكتروني:<br>shiftix@aldaghir.com</p>
                 </div>
             </div>
+            
             <div class="footer-bottom">
                 <p>&copy; 2025 Shiftix. جميع الحقوق محفوظة.</p>
                 <p>صُمم بـ ❤️ للعاملين في القطاع الصحي</p>
@@ -203,8 +924,46 @@
     </footer>
 
     <script>
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+        
+        // Fade in animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+        
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+        
+        // Language toggle
         function toggleLang() {
-            // يمكنك إضافة منطق تبديل اللغة هنا
             alert('النسخة الإنجليزية قيد الإنشاء');
         }
     </script>
